@@ -1,6 +1,50 @@
 
 // Enter your code below.
+const newOrderForm = document.querySelector("#new-order-form");
 
+newOrderForm.addEventListener('submit',(event)=>{
+
+    event.preventDefault();
+    let name = event.target.elements["order-item-name"].value;
+    let price = event.target.elements["order-item-price"].value;
+    let size = event.target.elements["order-size"].value;
+
+    let isFormValid = true;
+
+    if (isValueNotEmpty(name)){
+      event.target.elements["order-item-name"].classList.remove("is-invalid");
+    }
+    else{
+      event.target.elements["order-item-name"].classList.add("is-invalid");
+      isFormValid = false;
+    }
+
+    if(isValueNotEmpty(price) && isGreaterThanFive(price)){
+      event.target.elements["order-item-price"].classList.remove("is-invalid");
+    }
+    else{ 
+      event.target.elements["order-item-price"].classList.add("is-invalid");   
+      isFormValid = false;      
+    }
+
+    if(isValueNotEmpty(size)){
+      event.target.elements["order-size"].classList.remove("is-invalid");
+    }
+    else{
+      event.target.elements["order-size"].classList.add("is-invalid");
+      isFormValid = false;
+    }
+
+    if (isFormValid){
+      addOrderItem(name, price, size);
+    }
+
+    name = event.target.elements["order-item-name"].value="";
+    price = event.target.elements["order-item-price"].value="";
+    size = event.target.elements["order-size"].value="";
+    
+
+});
 
 // functions needed for assessment (do not change.)
 
